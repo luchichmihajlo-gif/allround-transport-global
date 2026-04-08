@@ -1,0 +1,7 @@
+{
+  "name": "Allround Transport Global",
+  "description": "A premier, high-conversion corporate website for a Rotterdam-based international logistics and freight forwarding company, featuring a Gemini-powered smart logistics assistant.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
