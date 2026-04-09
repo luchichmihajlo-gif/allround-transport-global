@@ -45,7 +45,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, currentLang, o
               <img 
                 src={LOGO_URL} 
                 alt="Allround Transport" 
-                className="h-16 md:h-24 lg:h-32 w-auto object-contain transition-all duration-300"
+                className="h-12 md:h-16 lg:h-20 w-auto object-contain transition-all duration-300"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
                   const parent = e.currentTarget.parentElement;

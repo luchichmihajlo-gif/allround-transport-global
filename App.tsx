@@ -9,9 +9,7 @@ import DestinationsPage from './components/DestinationsPage';
 import CountryPage from './components/CountryPage';
 import OtherServicesPage from './components/OtherServicesPage';
 import CustomsPage from './components/CustomsPage';
-import RoadTransportPage from './components/RoadTransportPage';
-import CoilTransportPage from './components/CoilTransportPage';
-import IndividualPage from './components/IndividualPage';
+import RoadCoilPage from './components/RoadCoilPage';
 import QuotePage from './components/QuotePage';
 import { CountryData } from './constants';
 import { translations } from './translations';
@@ -154,11 +152,9 @@ const App: React.FC = () => {
       case 'customs':
         return <CustomsPage lang={lang} onQuote={() => navigateTo('quote')} />;
       case 'road-transport':
-        return <RoadTransportPage onNavigate={navigateTo} lang={lang} />;
-      case 'coil-transport':
-        return <CoilTransportPage onBack={() => navigateTo('road-transport')} onQuote={() => navigateTo('quote')} lang={lang} />;
+        return <RoadCoilPage onNavigate={navigateTo} onQuote={() => navigateTo('quote')} lang={lang} />;
       case 'individual':
-        return <IndividualPage lang={lang} onQuote={() => navigateTo('quote')} />;
+        return <OtherServicesPage lang={lang} onQuote={() => navigateTo('quote')} />;
       case 'quote':
         return <QuotePage lang={lang} onNavigate={navigateTo} />;
       case 'home':
@@ -167,16 +163,44 @@ const App: React.FC = () => {
           <>
             <Hero lang={lang} onQuote={() => navigateTo('quote')} onDestinations={() => navigateTo('destinations')} />
 
-            {/* 4 Questions Strip */}
-            <section className="bg-navy border-b border-white/10">
+
+<Services lang={lang} onNavigate={navigateTo} />
+
+            {/* Flagship Section: Coil Transport Highlight */}
+            <section className="py-24 bg-slate-50 border-y border-slate-100">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
-                  {(t.home.questions as Array<{q: string; a: string}>).map((item, i) => (
-                    <div key={i} className="px-8 py-10">
-                      <p className="text-eu-yellow font-black text-xs uppercase tracking-widest mb-3">{item.q}</p>
-                      <p className="text-white/80 text-base leading-relaxed">{item.a}</p>
-                    </div>
-                  ))}
+                <div className="bg-white rounded-[3rem] p-12 lg:p-20 shadow-xl border border-slate-100 flex flex-col lg:flex-row gap-16 items-center overflow-hidden relative">
+                   <div className="absolute -top-20 -left-20 w-64 h-64 bg-eu-yellow/5 rounded-full blur-3xl"></div>
+                   <div className="lg:w-1/2 relative z-10">
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy text-eu-yellow text-[10px] font-black uppercase tracking-widest mb-6">
+                        <Cog className="w-3 h-3" /> {lang === 'EN' ? 'Specialized Flagship' : 'Gespecialiseerd Vlaggenschip'}
+                      </div>
+                      <h2 className="text-4xl md:text-5xl font-black text-navy mb-6 leading-tight">
+                        {lang === 'EN' ? 'Flagship Service: Coil Transport' : 'Vlaggenschip Dienst: Coil Transport'}
+                      </h2>
+                      <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                        {lang === 'EN'
+                          ? 'Specialized coiltrailers, engineered for the steel and automotive industries. Daily routes. All of Europe.'
+                          : 'Gespecialiseerde coiltrailers, ontworpen voor de staal- en automobielindustrie. Dagelijkse routes. Heel Europa.'}
+                      </p>
+                      <button
+                        onClick={() => navigateTo('road-transport')}
+                        className="flex items-center gap-3 bg-navy hover:bg-slate-800 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg group"
+                      >
+                        {lang === 'EN' ? 'Explore Flagship Equipment' : 'Ontdek Vlaggenschip Materieel'}
+                        <ArrowRight className="w-5 h-5 text-eu-yellow transition-transform group-hover:translate-x-1" />
+                      </button>
+                   </div>
+                   <div className="lg:w-1/2 relative">
+                      <div className="relative rounded-3xl overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
+                        <img
+                          src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200"
+                          alt="Industrial Coil Storage"
+                          className="w-full h-auto"
+                        />
+                        <div className="absolute inset-0 bg-navy/20"></div>
+                      </div>
+                   </div>
                 </div>
               </div>
             </section>
@@ -184,35 +208,26 @@ const App: React.FC = () => {
             {/* Process Section */}
             <section className="py-24 bg-white">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Top row: image left + title right */}
-                <div className="flex flex-col lg:flex-row gap-16 items-start mb-12">
-                  <div className="lg:w-1/2 reveal-left">
-                    <img
-                      src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1200"
-                      alt="Planning process"
-                      className="w-full h-[420px] object-cover rounded-3xl shadow-xl"
-                    />
-                  </div>
-                  <div className="lg:w-1/2 pt-4 reveal-right">
-                    <span className="text-xs font-black text-eu-yellow uppercase tracking-widest">
-                      {lang === 'EN' ? 'How It Works' : 'Hoe Het Werkt'}
-                    </span>
-                    <h2 className="text-5xl md:text-6xl font-black text-navy mt-3 mb-6">
-                      {lang === 'EN' ? 'Process' : 'Proces'}
-                    </h2>
-                    <p className="text-slate-600 text-lg leading-relaxed mb-8 max-w-md">
-                      {lang === 'EN'
-                        ? 'From first contact to final delivery. A clear, simple process with no surprises.'
-                        : 'Van eerste contact tot uiteindelijke levering. Een helder, eenvoudig proces zonder verrassingen.'}
-                    </p>
-                    <button
-                      onClick={() => navigateTo('quote')}
-                      className="inline-flex items-center gap-3 bg-eu-yellow hover:bg-yellow-500 text-navy px-8 py-4 rounded-xl font-black transition-all shadow-lg group"
-                    >
-                      {lang === 'EN' ? 'Request a Quote' : 'Offerte Aanvragen'}
-                      <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                    </button>
-                  </div>
+                {/* Top row: title left */}
+                <div className="mb-12 reveal-left">
+                  <span className="text-xs font-black text-eu-yellow uppercase tracking-widest">
+                    {lang === 'EN' ? 'How It Works' : 'Hoe Het Werkt'}
+                  </span>
+                  <h2 className="text-5xl md:text-6xl font-black text-navy mt-3 mb-6">
+                    {lang === 'EN' ? 'Process' : 'Proces'}
+                  </h2>
+                  <p className="text-slate-600 text-lg leading-relaxed mb-8 max-w-md">
+                    {lang === 'EN'
+                      ? 'From first contact to final delivery. A clear, simple process with no surprises.'
+                      : 'Van eerste contact tot uiteindelijke levering. Een helder, eenvoudig proces zonder verrassingen.'}
+                  </p>
+                  <button
+                    onClick={() => navigateTo('quote')}
+                    className="inline-flex items-center gap-3 bg-eu-yellow hover:bg-yellow-500 text-navy px-8 py-4 rounded-xl font-black transition-all shadow-lg group"
+                  >
+                    {lang === 'EN' ? 'Request a Quote' : 'Offerte Aanvragen'}
+                    <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                  </button>
                 </div>
 
                 {/* 3 Step Cards */}
@@ -240,7 +255,7 @@ const App: React.FC = () => {
                         : 'Wij regelen alles van ophalen tot uiteindelijke levering. U volgt de voortgang in real time en wij houden u bij elke stap op de hoogte.',
                     },
                   ].map((step, i) => (
-                    <div key={i} className={`reveal flex items-start gap-6 p-8 bg-slate-50 rounded-2xl border border-slate-100 hover:border-eu-yellow/30 hover:shadow-md transition-all delay-${i * 150 + 100}`}>
+                    <div key={i} className={`reveal flex items-start gap-6 p-8 bg-slate-50 rounded-2xl border border-slate-100 hover:border-eu-yellow/30 hover:shadow-md transition-all delay-${i * 75}`}>
                       <div className="text-4xl font-black text-slate-200 w-10 flex-shrink-0 leading-none">{i + 1}</div>
                       <div className="p-3 bg-navy rounded-xl text-eu-yellow flex-shrink-0">
                         {step.icon}
@@ -254,47 +269,6 @@ const App: React.FC = () => {
                 </div>
               </div>
             </section>
-
-            {/* Flagship Section: Coil Transport Highlight */}
-            <section className="py-24 bg-slate-50 border-y border-slate-100">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="bg-white rounded-[3rem] p-12 lg:p-20 shadow-xl border border-slate-100 flex flex-col lg:flex-row gap-16 items-center overflow-hidden relative">
-                   <div className="absolute -top-20 -left-20 w-64 h-64 bg-eu-yellow/5 rounded-full blur-3xl"></div>
-                   <div className="lg:w-1/2 relative z-10">
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy text-eu-yellow text-[10px] font-black uppercase tracking-widest mb-6">
-                        <Cog className="w-3 h-3" /> {lang === 'EN' ? 'Specialized Flagship' : 'Gespecialiseerd Vlaggenschip'}
-                      </div>
-                      <h2 className="text-4xl md:text-5xl font-black text-navy mb-6 leading-tight">
-                        {lang === 'EN' ? 'Flagship Service: Coil Transport' : 'Vlaggenschip Dienst: Coil Transport'}
-                      </h2>
-                      <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                        {lang === 'EN'
-                          ? 'Specialized coiltrailers, engineered for the steel and automotive industries. Daily routes. All of Europe.'
-                          : 'Gespecialiseerde coiltrailers, ontworpen voor de staal- en automobielindustrie. Dagelijkse routes. Heel Europa.'}
-                      </p>
-                      <button 
-                        onClick={() => navigateTo('coil-transport')}
-                        className="flex items-center gap-3 bg-navy hover:bg-slate-800 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg group"
-                      >
-                        {lang === 'EN' ? 'Explore Flagship Equipment' : 'Ontdek Vlaggenschip Materieel'}
-                        <ArrowRight className="w-5 h-5 text-eu-yellow transition-transform group-hover:translate-x-1" />
-                      </button>
-                   </div>
-                   <div className="lg:w-1/2 relative">
-                      <div className="relative rounded-3xl overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
-                        <img 
-                          src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200" 
-                          alt="Industrial Coil Storage" 
-                          className="w-full h-auto"
-                        />
-                        <div className="absolute inset-0 bg-navy/20"></div>
-                      </div>
-                   </div>
-                </div>
-              </div>
-            </section>
-
-            <Services lang={lang} onNavigate={navigateTo} />
 
             {/* ── F&Q Section ── */}
             {(() => {
@@ -416,9 +390,6 @@ const App: React.FC = () => {
               );
             })()}
 
-            <Advantage lang={lang} />
-            <TruckPullSlider lang={lang} onComplete={() => navigateTo('quote')} />
-            
             <section className="py-16 bg-white border-t border-slate-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-8">

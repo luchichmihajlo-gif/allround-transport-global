@@ -40,7 +40,7 @@ const Hero: React.FC<HeroProps> = ({ lang, onQuote, onDestinations }) => {
                <Zap className="w-3.5 h-3.5" /> {t.hero.tag}
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[1.05] mb-8 animate-in fade-in slide-in-from-left-6 duration-700 delay-100">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.15] mb-8 animate-in fade-in slide-in-from-left-6 duration-700 delay-100">
               {t.hero.title}
             </h1>
             

@@ -1,5 +1,5 @@
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     scroll-behavior: smooth;
 }
 
@@ -42,12 +42,24 @@ body {
 }
 
 /* Stagger delays */
+.delay-0   { transition-delay: 0ms; }
+.delay-75  { transition-delay: 75ms; }
 .delay-100 { transition-delay: 100ms; }
+.delay-150 { transition-delay: 150ms; }
 .delay-200 { transition-delay: 200ms; }
 .delay-300 { transition-delay: 300ms; }
 .delay-400 { transition-delay: 400ms; }
 .delay-500 { transition-delay: 500ms; }
 .delay-600 { transition-delay: 600ms; }
+
+/* ── Marquee / scrolling strip ───────────────────────────────── */
+@keyframes marquee-ltr {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.animate-marquee-ltr {
+  animation: marquee-ltr 24s linear infinite;
+}
 
 /* FAQ accordion */
 .faq-answer {

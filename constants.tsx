@@ -4,12 +4,10 @@ import { Truck, Ship, Plane, Box, Globe, Shield, Zap, MapPin, FileText, Home as 
 
 export const NAV_LINKS = [
   { label: 'Home', href: 'home' },
-  { label: 'Road Transport', href: 'road-transport' },
+  { label: 'Road & Coil', href: 'road-transport' },
   { label: 'Destinations', href: 'destinations' },
   { label: 'Customs', href: 'customs' },
   { label: 'Other Services', href: 'other-services' },
-  { label: 'Coil Transport', href: 'coil-transport' },
-  { label: 'Individual', href: 'individual' },
 ];
 
 export const LANGUAGES = [
@@ -91,12 +89,7 @@ export const SERVICES = [
     isPrimary: false,
     icon: <FileText className="w-8 h-8" />
   },
-  {
-    id: 'coil',
-    isPrimary: false,
-    icon: <Cog className="w-8 h-8" />
-  },
-  {
+{
     id: 'individual',
     isPrimary: false,
     icon: <HomeIcon className="w-8 h-8" />
